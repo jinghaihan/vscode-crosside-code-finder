@@ -2,7 +2,7 @@
   "publisher": "octohash",
   "name": "crosside-code-finder",
   "displayName": "Crosside Code Finder",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.20.0",
   "description": "",

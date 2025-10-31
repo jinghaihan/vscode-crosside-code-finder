@@ -68,7 +68,7 @@ const { activate, deactivate } = defineExtension(async (ctx: ExtensionContext) =
       },
       async (progress) => {
         await processCli('update')
-        progress.report({ increment: 100, message: 'completed' })
+        progress.report({ increment: 100, message: 'Update open recent history completed' })
       },
     )
   })

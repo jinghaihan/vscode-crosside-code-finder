@@ -2,7 +2,6 @@ import type { ExtensionContext } from 'vscode'
 import { exec, execFile } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { useLogger } from 'reactive-vscode'
 import { ProgressLocation, window } from 'vscode'
@@ -14,21 +13,9 @@ export const execFileAsync = promisify(execFile)
 
 export const logger = useLogger(displayName)
 
-export function normalizePath(path: string) {
-  if (path.startsWith('file://')) {
-    try {
-      return fileURLToPath(path)
-    }
-    catch {
-      return path
-    }
-  }
-  return path
-}
-
-async function hasPnpm(): Promise<boolean> {
+async function hasPnpm(path: string): Promise<boolean> {
   try {
-    await execFileAsync('pnpm', ['--version'])
+    await execFileAsync('pnpm', ['--version'], { cwd: path })
     return true
   }
   catch {
@@ -50,7 +37,7 @@ export async function installDependencies(ctx: ExtensionContext, { silent = fals
   const extpath = ctx.extensionPath
   const moduleRoot = join(ctx.extensionPath, 'node_modules')
 
-  const pnpmExists = await hasPnpm()
+  const pnpmExists = await hasPnpm(extpath)
   const sqlite3Exists = await hasSqlite3()
 
   const depsToInstall = RUNTIME_DEPENDENCIES

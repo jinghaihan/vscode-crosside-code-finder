@@ -14,7 +14,7 @@ catalogs:
     lint-staged: ^16.2.6
     simple-git-hooks: ^2.13.1
   test:
-    vitest: ^4.0.5
+    vitest: ^4.0.6
   tsc:
     typescript: ^5.9.3
   types:

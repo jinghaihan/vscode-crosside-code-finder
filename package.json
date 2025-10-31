@@ -1,0 +1,169 @@
+{
+  "publisher": "octohash",
+  "name": "crosside-code-finder",
+  "displayName": "Crosside Code Finder",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.20.0",
+  "description": "",
+  "author": "jinghaihan",
+  "license": "MIT",
+  "homepage": "https://github.com/jinghaihan/vscode-crosside-code-finder#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinghaihan/vscode-crosside-code-finder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jinghaihan/vscode-crosside-code-finder/issues"
+  },
+  "keywords": [
+    "vscode",
+    "cursor",
+    "windsurf",
+    "open",
+    "recent",
+    "history",
+    "projects",
+    "codespace"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/index.js",
+  "icon": "res/icon.png",
+  "files": [
+    "LICENSE.md",
+    "assets/*",
+    "dist/*",
+    "pnpm-workspace.yaml",
+    "res/*"
+  ],
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "octohash.crosside-code-finder.openRecent",
+        "title": "Open Recent...",
+        "category": "Crosside Code Finder"
+      },
+      {
+        "command": "octohash.crosside-code-finder.detectCodespaces",
+        "title": "Detect Codespaces",
+        "category": "Crosside Code Finder"
+      },
+      {
+        "command": "octohash.crosside-code-finder.installDependencies",
+        "title": "Install Dependencies",
+        "category": "Crosside Code Finder"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "vscode-crosside-code-finder",
+      "properties": {
+        "crosside-code-finder.ide": {
+          "type": "array",
+          "description": "The IDEs to read and update the open recent history.",
+          "default": [
+            "Visual Studio Code",
+            "Cursor",
+            "Windsurf"
+          ],
+          "items": {
+            "type": "string",
+            "enum": [
+              "Visual Studio Code",
+              "Visual Studio Code - Insiders",
+              "VSCodium",
+              "VSCodium - Insiders",
+              "Cursor",
+              "Windsurf"
+            ]
+          }
+        },
+        "crosside-code-finder.workspace": {
+          "type": "string",
+          "description": "The workspace to detect codespaces."
+        },
+        "crosside-code-finder.ignorePaths": {
+          "type": "array",
+          "description": "The paths to ignore in the detection of codespaces.",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "crosside-code-finder.showGitBranch": {
+          "type": "boolean",
+          "description": "Whether to show git branch in the open recent history.",
+          "default": true
+        },
+        "crosside-code-finder.showSource": {
+          "type": "boolean",
+          "description": "Whether to show source in the open recent history.",
+          "default": true
+        },
+        "crosside-code-finder.openInNewWindow": {
+          "type": "boolean",
+          "description": "Whether to open in a new window.",
+          "default": true
+        },
+        "crosside-code-finder.overwriteOpenRecent": {
+          "type": "boolean",
+          "description": "Whether to overwrite the open recent history when detecting codespaces.",
+          "default": false
+        }
+      }
+    }
+  },
+  "scripts": {
+    "dev": "pnpm build --watch --sourcemap",
+    "build": "tsdown",
+    "package": "vsce package --no-dependencies",
+    "deps": "taze major -I",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "release": "bumpp",
+    "generate": "vscode-ext-gen --output src/generated/meta.ts",
+    "prepare": "simple-git-hooks && pnpm generate",
+    "bootstrap": "pnpm install",
+    "prepublishOnly": "pnpm build",
+    "vscode:prepublish": "pnpm build"
+  },
+  "peerDependencies": {
+    "better-sqlite3": "^12.2.0"
+  },
+  "dependencies": {
+    "code-finder": "^0.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:lint",
+    "@types/node": "catalog:types",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "catalog:cli",
+    "bumpp": "catalog:cli",
+    "eslint": "catalog:lint",
+    "lint-staged": "catalog:lint",
+    "pncat": "catalog:cli",
+    "reactive-vscode": "catalog:vscode",
+    "simple-git-hooks": "catalog:lint",
+    "taze": "catalog:cli",
+    "tsdown": "catalog:build",
+    "typescript": "catalog:tsc",
+    "vitest": "catalog:test",
+    "vscode-ext-gen": "catalog:vscode",
+    "vsxpub": "catalog:cli"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}

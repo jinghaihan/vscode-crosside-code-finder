@@ -5,6 +5,9 @@
 
 A VS Code extension for cross-IDE recent project management. View and open recently accessed projects across multiple IDEs (Visual Studio Code, Cursor, Windsurf) in one unified interface. Automatically detect and manage code repositories in your configured workspace path, with support for git branch display and flexible configuration options.
 
+> [!IMPORTANT]
+> This extension requires **Node.js** to be installed on your system. Please install it from [nodejs.org](https://nodejs.org/) before using this extension.
+
 <p align="center"><samp>Preview</samp></p>
 
 <div align="center">
@@ -12,13 +15,10 @@ A VS Code extension for cross-IDE recent project management. View and open recen
   <img src="./assets/dark.png" alt="dark" width="45%">
 </div>
 
-> [!IMPORTANT]
-> This extension requires **Node.js** to be installed on your system. Please install it from [nodejs.org](https://nodejs.org/) before using this extension.
+## Configuration
 
 > [!TIP]
 > On Windows, enabling `showGitBranch` may slow down the query performance. You can disable it in the settings if needed.
-
-## Configuration
 
 <!-- configs -->
 

@@ -137,10 +137,10 @@
     "vscode:prepublish": "pnpm build"
   },
   "peerDependencies": {
-    "better-sqlite3": "^12.2.0"
+    "better-sqlite3": "catalog:database"
   },
   "dependencies": {
-    "code-finder": "^0.2.1"
+    "code-finder": "catalog:cli"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:lint",

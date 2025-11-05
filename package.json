@@ -2,7 +2,7 @@
   "publisher": "octohash",
   "name": "crosside-code-finder",
   "displayName": "Crosside Code Finder",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "packageManager": "pnpm@10.20.0",
   "description": "Syncs recent projects across VSCode and its forks, with Codespaces detection.",

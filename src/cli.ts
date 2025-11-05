@@ -1,8 +1,9 @@
 import type { HistoryEntry } from 'code-finder'
 import process from 'node:process'
+import { getCachedData, setCachedData } from './cache'
 import { config } from './config'
 import { CLI_PATH, EDITOR_CONFIG_NAME_MAP } from './constants'
-import { execFileAsync } from './utils'
+import { execFileAsync, logger } from './utils'
 
 async function executeCli(args: string[]) {
   let stdout: string
@@ -18,6 +19,15 @@ async function executeCli(args: string[]) {
 }
 
 export async function processCli(mode: 'update' | 'combine'): Promise<HistoryEntry[] | undefined> {
+  // For 'combine' mode, try to use cache first
+  if (mode === 'combine') {
+    const cached = getCachedData()
+    if (cached) {
+      logger.info('Using cached data')
+      return cached
+    }
+  }
+
   const { extractJSON, normalizePath } = await import('code-finder')
 
   const ide = config.ide.map(name => EDITOR_CONFIG_NAME_MAP[name as keyof typeof EDITOR_CONFIG_NAME_MAP])
@@ -45,6 +55,10 @@ export async function processCli(mode: 'update' | 'combine'): Promise<HistoryEnt
     args.push('--source')
 
   const stdout = await executeCli(args)
-  if (mode === 'combine')
-    return extractJSON(stdout)
+  if (mode === 'combine') {
+    const result = extractJSON(stdout)
+    if (result && result.length > 0)
+      setCachedData(result)
+    return result
+  }
 }

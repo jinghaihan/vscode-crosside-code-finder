@@ -31,6 +31,7 @@ A VS Code extension for cross-IDE recent project management. View and open recen
 | `crosside-code-finder.showSource`          | Whether to show source in the open recent history.                      | `boolean` | `true`                                       |
 | `crosside-code-finder.openInNewWindow`     | Whether to open in a new window.                                        | `boolean` | `true`                                       |
 | `crosside-code-finder.overwriteOpenRecent` | Whether to overwrite the open recent history when detecting codespaces. | `boolean` | `false`                                      |
+| `crosside-code-finder.cacheTTL`            | The TTL of the cache in milliseconds.                                   | `number`  | `30000`                                      |
 
 <!-- configs -->
 

@@ -117,6 +117,12 @@
           "type": "boolean",
           "description": "Whether to overwrite the open recent history when detecting codespaces.",
           "default": false
+        },
+        "crosside-code-finder.cacheTTL": {
+          "type": "number",
+          "description": "The TTL of the cache in milliseconds.",
+          "default": 30000,
+          "minimum": 0
         }
       }
     }
